@@ -1,0 +1,15 @@
+bundle agent libprint(message)
+{
+  reports:
+      "Library: $(message).";
+}
+bundle agent main
+{
+  methods:
+      any::
+        "test" usebundle => libprint( "ok 1 - libprint works" );
+  reports:
+    cfengine::
+           "Hello, world!";
+      "Boo hoo";
+}
