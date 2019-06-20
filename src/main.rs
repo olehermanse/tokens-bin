@@ -3,9 +3,8 @@ use std::env;
 use std::fs;
 use tokens::{Token, TokenCategory};
 
-fn main() -> Result<(), Box<dyn std::error::Error + 'static>> {
-    let args: Vec<String> = env::args().collect();
-    let data = fs::read_to_string(&args[1])?;
+fn format(filename: &str) -> Result<(), Box<dyn std::error::Error + 'static>> {
+    let data = fs::read_to_string(filename)?;
     let token = Token::from(data.as_str());
     let tokens = token.get_tokens();
     let mut indent = 0;
@@ -79,4 +78,12 @@ fn main() -> Result<(), Box<dyn std::error::Error + 'static>> {
         }
     }
     Ok(())
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error + 'static>> {
+    let args: Vec<String> = env::args().collect();
+    return match args[1].as_str() {
+        "format" => format(&args[2]),
+        _ => Ok(()),
+    };
 }
