@@ -33,9 +33,10 @@ fn main() -> Result<(), Box<dyn std::error::Error + 'static>> {
 
             if decrease {
                 indent = 0;
+            } else {
+                println!("");
             }
 
-            println!("");
             for _ in 0..indent {
                 print!(" ");
             }
